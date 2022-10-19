@@ -54,7 +54,7 @@ resource "aws_iam_role_policy" "codebuild_role_policy" {
         "ec2:CreateNetworkInterfacePermission"
       ],
       "Resource": [
-        "arn:aws:ec2:us-east-1:123456789012:network-interface/*"
+        "*"
       ]
     },
     {
