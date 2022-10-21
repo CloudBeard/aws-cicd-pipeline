@@ -27,7 +27,6 @@ You can test the pipeline using [This Demo Code Repo](https://github.com/CloudBe
 *Note this code is simple and may change overtime to test various build stages and features*
 
 ## Infrastructure
-![Alt text](./AWS-Native-CICD-Pipeline.svg)
 <img src="./AWS Native CICD Pipeline.svg">
 <br>
 The Infrastructure consists of AWS CodePipeline as the orchestrator for CodeCommit and CodeBuild.
