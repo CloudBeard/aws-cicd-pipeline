@@ -1,6 +1,6 @@
 # AWS Native CICD Pipeline
 
-This Repo uses all AWS Services to create a cloud native pipeline. It can be modified to start including external services.
+This Repo uses all AWS Services to create a cloud native pipeline. It can be modified to start including external services. The Pipeline is built in various stages. The first stage utilizes Terraform validate and tflint, the second stage utilizes Checkov to scan for misconfigurations against best practices, and the third stage is a release stage where the code will be built in production.
 
 ## Table of Contents
 1. [Step 1](#step-1)
