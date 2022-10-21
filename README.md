@@ -3,7 +3,13 @@
 This Repo uses all AWS Services to create a cloud native pipeline. It can be modified to start including external services. The Pipeline is built in various stages. The first stage utilizes Terraform validate and tflint, the second stage utilizes Checkov to scan for misconfigurations against best practices, and the third stage is a release stage where the code will be built in production.
 
 ## Table of Contents
-1. [Step 1](#step-1)
+- [AWS Native CICD Pipeline](#aws-native-cicd-pipeline)
+  - [Table of Contents](#table-of-contents)
+  - [Step 1](#step-1)
+  - [Step 2](#step-2)
+  - [Step 3](#step-3)
+  - [Testing the Pipeline](#testing-the-pipeline)
+  - [Infrastructure](#infrastructure)
 
 
 ## Step 1
@@ -21,4 +27,7 @@ You can test the pipeline using [This Demo Code Repo](https://github.com/CloudBe
 *Note this code is simple and may change overtime to test various build stages and features*
 
 ## Infrastructure
-NOTE TO SELF insert Infra Image and describe what is built.
+![Alt text](./AWS-Native-CICD-Pipeline.svg)
+<img src="./AWS Native CICD Pipeline.svg">
+<br>
+The Infrastructure consists of AWS CodePipeline as the orchestrator for CodeCommit and CodeBuild.
