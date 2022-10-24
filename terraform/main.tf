@@ -42,6 +42,17 @@ module "aws-codebuild-checkov" {
 
 }
 
+module "aws-codebuild-tf-apply" {
+  source             = "./modules/aws-codebuild"
+  base_name          = "build-apply"
+  codecommit_url     = module.aws-codecommit.codecommit_url
+  cicd_s3_bucket     = module.aws-s3.cicd_bucket_bucket
+  cicd_s3_arn        = module.aws-s3.cicd_bucket_arn
+  codebuild_role_arn = module.aws-codebuild-iam.codebuild_role_arn
+  buildspec          = "buildspec-apply.yml"
+
+}
+
 module "aws-codepipeline" {
   source            = "./modules/aws-codepipeline"
   base_name         = var.base_name
