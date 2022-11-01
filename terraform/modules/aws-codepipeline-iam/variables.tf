@@ -23,9 +23,9 @@ variable "codebuild_checkov_arn" {
   description = "The ARN for the CodeBuild checkov build"
 }
 
-variable "codebuild_terratest_arn" {
+variable "codebuild_apply_arn" {
   type        = string
-  description = "The ARN for the CodeBuild terratest build"
+  description = "The ARN for the CodeBuild apply build"
 }
 
 variable "kms_master_key_id" {

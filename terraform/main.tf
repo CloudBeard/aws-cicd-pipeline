@@ -4,19 +4,20 @@ module "aws-codecommit" {
 }
 
 module "aws-codebuild-iam" {
-  source      = "./modules/aws-codebuild-iam"
-  cicd_s3_arn = module.aws-s3.cicd_bucket_arn
+  source            = "./modules/aws-codebuild-iam"
+  cicd_s3_arn       = module.aws-s3.cicd_bucket_arn
+  kms_master_key_id = module.aws-kms.cicd_key_arn
 }
 
 module "aws-codepipeline-iam" {
-  source                  = "./modules/aws-codepipeline-iam"
-  cicd_s3_arn             = module.aws-s3.cicd_bucket_arn
-  codebuild_role_arn      = module.aws-codebuild-iam.codebuild_role_arn
-  codecommit_arn          = module.aws-codecommit.codecommit_arn
-  codebuild_tflint_arn    = module.aws-codebuild-tflint.codebuild_arn
-  codebuild_checkov_arn   = module.aws-codebuild-checkov.codebuild_arn
-  codebuild_terratest_arn = module.aws-codebuild-terratest.codebuild_arn
-  kms_master_key_id       = module.aws-kms.cicd_key_arn
+  source                = "./modules/aws-codepipeline-iam"
+  cicd_s3_arn           = module.aws-s3.cicd_bucket_arn
+  codebuild_role_arn    = module.aws-codebuild-iam.codebuild_role_arn
+  codecommit_arn        = module.aws-codecommit.codecommit_arn
+  codebuild_tflint_arn  = module.aws-codebuild-tflint.codebuild_arn
+  codebuild_checkov_arn = module.aws-codebuild-checkov.codebuild_arn
+  codebuild_apply_arn   = module.aws-codebuild-apply.codebuild_arn
+  kms_master_key_id     = module.aws-kms.cicd_key_arn
 
 }
 
@@ -42,7 +43,7 @@ module "aws-codebuild-checkov" {
 
 }
 
-module "aws-codebuild-tf-apply" {
+module "aws-codebuild-apply" {
   source             = "./modules/aws-codebuild"
   base_name          = "build-apply"
   codecommit_url     = module.aws-codecommit.codecommit_url
@@ -77,7 +78,7 @@ terraform {
   backend "s3" {
     bucket         = "cicd-remote-state"
     key            = "state/terraform.tfstate"
-    region         = "us-east-1"
+    region         = var.aws_region
     dynamodb_table = "cicd-remote-state-lock-dynamodb"
   }
 }

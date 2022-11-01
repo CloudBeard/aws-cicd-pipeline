@@ -68,19 +68,19 @@ resource "aws_codepipeline" "codepipeline" {
   }
 
       stage {
-    name = "Build-TerraTest"
+    name = "Build-Apply"
 
     action {
-      name             = "Build-TerraTest"
+      name             = "Build-Apply"
       category         = "Build"
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["source_output"]
-      output_artifacts = ["build_terratest_output"]
+      output_artifacts = ["build_apply_output"]
       version          = "1"
 
       configuration = {
-        ProjectName = "build-terratest-project"
+        ProjectName = "build-apply-project"
       }
     }
   }

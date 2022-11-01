@@ -66,6 +66,25 @@ resource "aws_iam_role_policy" "codebuild_role_policy" {
         "${var.cicd_s3_arn}",
         "${var.cicd_s3_arn}/*"
       ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:CreateBucket"
+      ],
+      "Resource": "*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
+      ],
+      "Resource": [
+        "${var.kms_master_key_id}"
+      ]
     }
   ]
 }

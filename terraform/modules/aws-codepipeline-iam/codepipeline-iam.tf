@@ -25,20 +25,22 @@ resource "aws_iam_role_policy" "codepipeline_role_policy" {
       "Version" : "2012-10-17",
       "Statement" : [
         {
-          "Effect":"Allow",
-          "Action": [
+          "Effect" : "Allow",
+          "Action" : [
             "s3:*"
           ],
-          "Resource": [
+          "Resource" : [
             "*"
           ]
         },
         {
-          "Effect":"Allow",
-          "Action": [
-            "kms:GenerateDataKey"
+          "Effect" : "Allow",
+          "Action" : [
+            "kms:GenerateDataKey",
+            "kms:Encrypt",
+            "kms:Decrypt"
           ],
-          "Resource": [
+          "Resource" : [
             var.kms_master_key_id
           ]
         },
@@ -73,7 +75,7 @@ resource "aws_iam_role_policy" "codepipeline_role_policy" {
           "Resource" : [
             var.codebuild_tflint_arn,
             var.codebuild_checkov_arn,
-            var.codebuild_terratest_arn
+            var.codebuild_apply_arn
           ]
         }
       ]
