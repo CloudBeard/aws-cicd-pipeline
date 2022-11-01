@@ -36,7 +36,9 @@ resource "aws_iam_role_policy" "codepipeline_role_policy" {
         {
           "Effect" : "Allow",
           "Action" : [
-            "kms:GenerateDataKey"
+            "kms:GenerateDataKey",
+            "kms:Encrypt",
+            "kms:Decrypt"
           ],
           "Resource" : [
             var.kms_master_key_id

@@ -4,8 +4,9 @@ module "aws-codecommit" {
 }
 
 module "aws-codebuild-iam" {
-  source      = "./modules/aws-codebuild-iam"
-  cicd_s3_arn = module.aws-s3.cicd_bucket_arn
+  source            = "./modules/aws-codebuild-iam"
+  cicd_s3_arn       = module.aws-s3.cicd_bucket_arn
+  kms_master_key_id = module.aws-kms.cicd_key_arn
 }
 
 module "aws-codepipeline-iam" {
@@ -77,7 +78,7 @@ terraform {
   backend "s3" {
     bucket         = "cicd-remote-state"
     key            = "state/terraform.tfstate"
-    region         = "us-east-1"
+    region         = var.aws_region
     dynamodb_table = "cicd-remote-state-lock-dynamodb"
   }
 }
