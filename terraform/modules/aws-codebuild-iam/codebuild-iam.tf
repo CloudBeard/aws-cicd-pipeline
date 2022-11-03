@@ -70,9 +70,10 @@ resource "aws_iam_role_policy" "codebuild_role_policy" {
     {
       "Effect": "Allow",
       "Action": [
-        "s3:CreateBucket"
+        "s3:*"
       ],
-      "Resource": "*"
+      "Resource": [
+        "*"
       ]
     },
     {
