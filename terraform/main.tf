@@ -78,7 +78,7 @@ terraform {
   backend "s3" {
     bucket         = "cicd-remote-state"
     key            = "state/terraform.tfstate"
-    region         = var.aws_region
+    region         = "us-east-1"
     dynamodb_table = "cicd-remote-state-lock-dynamodb"
   }
 }
