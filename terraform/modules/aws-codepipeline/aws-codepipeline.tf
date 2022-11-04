@@ -11,7 +11,7 @@ resource "aws_codepipeline" "codepipeline" {
       type = "KMS"
     }
   }
-  
+
   stage {
     name = "Source"
 
@@ -24,9 +24,9 @@ resource "aws_codepipeline" "codepipeline" {
       output_artifacts = ["source_output"]
 
       configuration = {
-        RepositoryName   = "${var.base_name}-codecommit-main"
+        RepositoryName       = "${var.base_name}-pipeline-codecommit"
         PollForSourceChanges = true
-        BranchName       = "master"
+        BranchName           = "dev"
       }
     }
   }
@@ -49,7 +49,7 @@ resource "aws_codepipeline" "codepipeline" {
     }
   }
 
-    stage {
+  stage {
     name = "Build-Checkov"
 
     action {
@@ -67,7 +67,7 @@ resource "aws_codepipeline" "codepipeline" {
     }
   }
 
-      stage {
+  stage {
     name = "Build-Apply"
 
     action {
