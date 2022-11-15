@@ -74,6 +74,11 @@ module "aws-s3" {
   base_name         = var.base_name
 }
 
+module "aws-codecommit-iam" {
+  source            = "./modules/aws-codecommit-iam"
+  codecommit_arn    = module.aws-codecommit.codecommit_arn
+}
+
 terraform {
   backend "s3" {
     bucket         = "cicd-remote-state"
