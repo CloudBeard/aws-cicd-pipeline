@@ -26,7 +26,7 @@ resource "aws_codepipeline" "codepipeline" {
       configuration = {
         RepositoryName       = "${var.base_name}-pipeline-codecommit"
         PollForSourceChanges = true
-        BranchName           = "dev"
+        BranchName           = "master"
       }
     }
   }
@@ -63,6 +63,23 @@ resource "aws_codepipeline" "codepipeline" {
 
       configuration = {
         ProjectName = "build-checkov-project"
+      }
+    }
+  }
+
+    stage {
+    name = "Manual-Approval"
+
+    action {
+      name             = "Manual-Approval"
+      category         = "Approval"
+      owner            = "AWS"
+      provider         = "Manual"
+      version          = "1"
+      
+      configuration = {
+        NotificationArn = var.cicd_sns_arn
+        ExternalEntityLink = var.codecommit_url
       }
     }
   }

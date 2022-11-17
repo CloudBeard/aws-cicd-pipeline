@@ -61,6 +61,7 @@ module "aws-codepipeline" {
   cicd_s3_bucket    = module.aws-s3.cicd_bucket_bucket
   kms_master_key_id = module.aws-kms.cicd_key_arn
   codepipeline_role = module.aws-codepipeline-iam.codepipeline_role
+  cicd_sns_arn = module.aws-sns.cicd_sns_arn
 }
 
 module "aws-kms" {
@@ -74,9 +75,9 @@ module "aws-s3" {
   base_name         = var.base_name
 }
 
-module "aws-codecommit-iam" {
-  source            = "./modules/aws-codecommit-iam"
-  codecommit_arn    = module.aws-codecommit.codecommit_arn
+module "aws-sns" {
+  source    = "./modules/aws-sns"
+  kms_master_key_id = module.aws-kms.cicd_key_arn
 }
 
 terraform {

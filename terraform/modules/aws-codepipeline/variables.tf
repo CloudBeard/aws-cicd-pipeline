@@ -27,3 +27,8 @@ variable "codepipeline_role" {
   type        = string
   description = "The ARN for CodePipeline Role"
 }
+
+variable "cicd_sns_arn" {
+  type        = string
+  description = "The ARN for SNS Topic"
+}
